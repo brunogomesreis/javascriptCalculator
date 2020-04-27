@@ -1,0 +1,23 @@
+Definir uma classe em JS
+
+Class classe {
+
+    constructor(){
+        this._variavelprivadaPrecisaDeUnderline;
+        this.variavelpublica;
+    }
+
+}
+
+
+-- Para executar o trecho de tempos em tempos
+let interval setInterval(()=>{
+    escopo da função
+}, tempo)
+
+-- a variável interval vai pegar um id do intervalo, com isso, podemos, por exemplo usar a função clearInteval para parar depois de um timeout (exemplo a seguir)
+-- Para executar depois de um tempo
+
+setTimeout((=>{
+    escopo
+}), tempo)

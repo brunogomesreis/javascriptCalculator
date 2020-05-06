@@ -62,8 +62,8 @@ class CalcController {
             case 'igual':
                 this.calc();
                 break;
-            case '.':
-                this.addOperation('.');
+            case 'ponto':
+                this.addDot();
                 break;
             case '0':
             case '1':
@@ -90,6 +90,8 @@ class CalcController {
     }
     clearAll() {
         this._operation = [];
+        this._lastNumber = '';
+        this._lastOperator = '';
         this.setLastNumberToDisplay();
     }
 
@@ -176,27 +178,35 @@ class CalcController {
 
             if (this.isOperator(value)) {
                 this.setLastOperation(value)
-            } else if (isNaN(value)) {
-                //tratar
             } else {
-                this._operation.push(parseInt(value));
+                this.pushOperation(value);
                 this.setLastNumberToDisplay();
             }
         } else {
 
             if (this.isOperator(value)) {
                 this.pushOperation(value)
-            }
-            else if (isNaN(value)) {
-                //tratar
             } else {
                 let newValue = this.getLastOperation().toString() + value.toString();
-                this.setLastOperation(parseInt(newValue));
+                this.setLastOperation(newValue);
                 this.setLastNumberToDisplay();
             }
 
         };
         console.log(this._operation)
+    }
+
+    addDot() {
+        let lastOperation = this.getLastOperation();
+
+        if (typeof lastOperation === 'string' && lastOperation.split('').indexOf('.') > -1) return;
+
+        if (this.isOperator(lastOperation) || !lastOperation) {
+            this.pushOperation('0.');
+        } else {
+            this.setLastOperation(lastOperation.toString() + '.')
+        }
+        this.setLastNumberToDisplay()
     }
 
     inicializeButtons() {
